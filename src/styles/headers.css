@@ -1,0 +1,25 @@
+.header-auth {
+  background: #034c70;
+  color: #ffffff;
+}
+
+.titles {
+  color: #ffffff !important;
+  margin-left: 36px;
+  white-space: pre !important;
+  position: initial !important;
+}
+
+.logo-epn {
+  height: 50px;
+  /*min-width: 120px;*/
+  /*background-image: url('../imgs/logo.png');*/
+  /*!*background-color: #00aeef;*!*/
+  /*background-repeat: no-repeat;*/
+  /*background-size: contain;*/
+  /*background-position: center;*/
+  margin: 16px;
+  /*margin-left: 215px;*/
+  float: right;
+  display: flex;
+}

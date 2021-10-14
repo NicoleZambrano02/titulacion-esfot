@@ -1,0 +1,77 @@
+.states {
+  position: absolute;
+  width: 250px;
+  height: 1250px;
+  left: 0;
+  top: 0;
+  background-color: #dddddd;
+}
+
+.steps {
+  position: absolute;
+  width: 176px;
+  height: 24px;
+  left: 36px;
+  top: 170px;
+}
+
+.menus {
+  border-bottom: none;
+  float: right;
+  margin-right: 30px;
+  margin-top: 50px;
+  color: #034c70;
+}
+
+.titles {
+  position: absolute;
+  width: 175px;
+  height: 32px;
+  left: 35px;
+  top: 120px;
+  size: 50px;
+  color: #034c70;
+}
+
+.menus .ant-menu-item .anticon,
+.ant-menu-submenu-title .anticon {
+  font-size: 35px;
+}
+
+.principal {
+  position: absolute;
+  width: 85%;
+  left: 310px;
+  top: 70px;
+}
+
+.title {
+  font-size: 35px;
+  color: #034c70;
+}
+
+.subtitle {
+  font-size: 20px;
+  top: 50px;
+  color: #034c70;
+}
+
+.general {
+  margin-top: 15%;
+}
+
+.submit {
+  background-color: #034c70;
+  color: #ffffff;
+}
+
+.plan-approval-rubric h4 {
+  margin: 20px 0 5px;
+}
+
+.plan-form .ant-form-item-label {
+  position: sticky;
+  top: 20px;
+  z-index: 1;
+  height: 32px;
+}

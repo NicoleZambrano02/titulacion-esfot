@@ -1,0 +1,28 @@
+.title {
+  position: absolute;
+  left: 150px;
+  color: #034c70;
+  bottom: 345px;
+  font-size: 40px;
+}
+
+.subtitle1 {
+  position: absolute;
+  left: 150px;
+  color: #034c70;
+  bottom: 295px;
+}
+
+.searchInput {
+  position: absolute;
+  left: 150px;
+  bottom: 260px;
+  width: 50%;
+}
+
+.table {
+  position: relative;
+  left: 116px;
+  bottom: -70px;
+  width: 100%;
+}
