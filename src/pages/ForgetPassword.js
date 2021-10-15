@@ -3,8 +3,9 @@ import { useAuth } from "../providers/Auth";
 import { Button, Col, Form, Input, Row } from "antd";
 import { UserOutlined } from "@ant-design/icons/lib";
 import { message } from "antd";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../styles/login.css";
+import Routes from "../constants/routes";
 
 const SendPasswordResetEmailPage = () => {
   const { sendPasswordResetEmail } = useAuth();
@@ -91,6 +92,9 @@ const SendPasswordResetEmailPage = () => {
                   >
                     Enviar
                   </Button>
+                  <div>
+                    <Link to={Routes.LOGIN}>Regresar</Link>
+                  </div>
                 </Form.Item>
               </Form>
             </div>
