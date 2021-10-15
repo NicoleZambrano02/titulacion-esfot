@@ -64,7 +64,7 @@ const HomePage = () => {
                 <Button
                   className="home-button"
                   type="primary"
-                  href={Routes.TEACHERS_IDEAS}
+                  href={Routes.LOGIN}
                 >
                   Ver temas
                 </Button>
@@ -105,7 +105,12 @@ const HomePage = () => {
                 Escríbenos, con gusto te ayudaremos
                 <br />
                 <br />
-                <Button className="home-button" type="primary">
+                <Button
+                  className="home-button"
+                  type="primary"
+                  href={"https://outlook.office.com/"}
+                  target={"_blank"}
+                >
                   Enviar mail
                 </Button>
               </Card>

@@ -64,8 +64,8 @@ const TeachersIdeasList = () => {
             </Col>
           </Row>
           <p>
-            Contáctate directamente con el profesor proponente para indicarle
-            que deseas realizar este tema de titulación
+            Contáctate directamente con el profesor a cargo para indicarle que
+            deseas realizar este tema de titulación
           </p>
         </div>
       ),
@@ -78,7 +78,7 @@ const TeachersIdeasList = () => {
         href: "https://outlook.office.com/",
         target: "_blank",
       },
-      okText: "Enviar e-mial al profesor",
+      okText: "Enviar e-mail al profesor",
       maskClosable: true,
       centered: true,
     });
