@@ -3,11 +3,13 @@ import { useAuth } from "../providers/Auth";
 import { Button, Col, Form, Input, Row } from "antd";
 import { UserOutlined } from "@ant-design/icons/lib";
 import { message } from "antd";
+import { useHistory } from "react-router-dom";
 import "../styles/login.css";
 
 const SendPasswordResetEmailPage = () => {
   const { sendPasswordResetEmail } = useAuth();
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const onSendEmail = async ({ email }) => {
     setLoading(true);
@@ -17,6 +19,7 @@ const SendPasswordResetEmailPage = () => {
       message.success(
         "Te hemos enviado un correo con instrucciones para restablecer tu clave."
       );
+      history.push("/");
     } catch (error) {
       setLoading(false);
       if (error.response) {

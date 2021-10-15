@@ -97,33 +97,6 @@ const StudentHomePage = () => {
                 </Space>
               </Card>
             </Col>
-            <Col span={6}>
-              <Card
-                className="options main-options"
-                title="Defensa de grado"
-                bordered={false}
-              >
-                <Space direction="vertical" size="large">
-                  <div>
-                    <FundProjectionScreenOutlined className={"big-icon"} />
-                  </div>
-                  <div>Mira la fecha de tu defensa de grado</div>
-                  <div>
-                    <Button
-                      disabled={
-                        projects[0] &&
-                        !(
-                          projects[0].status === "date_defense_assigned" ||
-                          projects[0].status === "project_completed"
-                        )
-                      }
-                    >
-                      Ver fecha
-                    </Button>
-                  </div>
-                </Space>
-              </Card>
-            </Col>
           </Row>
         </Col>
       </Row>
