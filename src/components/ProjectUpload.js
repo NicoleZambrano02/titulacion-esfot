@@ -111,8 +111,10 @@ const ProjectUpload = () => {
     setIsSending(true);
     const data = new FormData();
     data.append("report_pdf", formData.report_pdf[0]);
+    const dataToSent = { highlights: null };
 
     try {
+      await API.post(`/projects/${projects[0].id}`, dataToSent); //put data to server
       await API.post(`/projects/${projects[0].id}/pdf`, data);
       switch (projects[0].status) {
         case "plan_approved_commission":
