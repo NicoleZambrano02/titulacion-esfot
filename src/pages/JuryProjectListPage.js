@@ -31,6 +31,7 @@ const JuryProjectsListPage = () => {
           teacher_name: `${jury.project.teacher_name} ${jury.project.teacher_lastName}`,
           created_at: jury.project.created_at,
           status: jury.project.status,
+          tribunalSchedule: jury.tribunalSchedule,
         };
       }
     }

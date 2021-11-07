@@ -15,12 +15,11 @@ import Title from "antd/es/typography/Title";
 import { useCareersList } from "../data/useCareersList";
 import NewTribunalForm from "./NewTribunalForm";
 import { useHistory } from "react-router-dom";
-import Routes from "../constants/routes";
 import OralDefenseSchedule from "./OralDefenseSchedule";
 
 const { Link } = Typography;
 
-const ProjectsList = ({
+const ProjectsListStatus = ({
   projectsList,
   assignTribunal,
   assignDate,
@@ -103,15 +102,17 @@ const ProjectsList = ({
   const dataTribunalAssigned = projectsList
     .map(
       (project, index) =>
-        project.status === "tribunal_assigned" && {
+        project.status === "tribunal_assigned" ||
+        (project.status === "date_defense_assigned" && {
           key: index,
           originalData: project.originalData,
           student_name: project.student_name,
           title: project.title,
           teacher_name: project.teacher_name,
           created_at: project.created_at,
+          date_defense: project.tribunalSchedule,
           status: project.status,
-        }
+        })
     )
     .filter(Boolean);
 
@@ -273,6 +274,12 @@ const ProjectsList = ({
         }
       },
     },
+    {
+      title: "Fecha de defensa",
+      dataIndex: "date_defense",
+      key: "date_defense",
+      // render: () => <Title level={5}>FECHA</Title>,
+    },
   ];
 
   titleModal = (
@@ -319,7 +326,7 @@ const ProjectsList = ({
     <>
       {assignTribunal && !allProjects && !assignDate ? (
         <Table
-          columns={columns}
+          columns={columns.filter((col) => col.key !== "date_defense")}
           dataSource={dataToAssignTribunal}
           rowKey={(dataTribunal) => dataTribunal.id}
           onRow={(record) => {
@@ -334,7 +341,7 @@ const ProjectsList = ({
         />
       ) : assignDate && showDefenseSchedule === false ? (
         <Table
-          columns={columns}
+          columns={columns.filter((col) => col.key !== "date_defense")}
           dataSource={dataDate}
           rowKey={(dataDate) => dataDate.id}
           onRow={(record) => {
@@ -350,7 +357,11 @@ const ProjectsList = ({
       ) : assignDate && showDefenseSchedule === true ? (
         <OralDefenseSchedule project={defenseProjectData} />
       ) : !assignTribunal && allProjects ? (
-        <Table columns={columns} dataSource={data} rowKey={(data) => data.id} />
+        <Table
+          columns={columns.filter((col) => col.key !== "date_defense")}
+          dataSource={data}
+          rowKey={(data) => data.id}
+        />
       ) : (
         isTribunal && (
           <Table
@@ -360,12 +371,20 @@ const ProjectsList = ({
             onRow={(record) => {
               return {
                 onClick: (event) => {
-                  event.stopPropagation();
-                  setProjectData(record.originalData);
-                  history.push({
-                    pathname: Routes.JURY_PROJECT_REVIEW,
-                    state: { idPlan: record.originalData.id, user: "tribunal" },
+                  console.log({
+                    project: record.originalData,
+                    tribunalSchedule: record.date_defense,
                   });
+                  event.stopPropagation();
+                  setProjectData({
+                    ...projectData,
+                    project: record.originalData,
+                    tribunalSchedule: record.date_defense,
+                  });
+                  // history.push({
+                  //   pathname: Routes.JURY_PROJECT_REVIEW,
+                  //   state: { idPlan: record.originalData.id, user: "tribunal" },
+                  // });
                 },
               };
             }}
@@ -387,4 +406,4 @@ const ProjectsList = ({
   );
 };
 
-export default ProjectsList;
+export default ProjectsListStatus;

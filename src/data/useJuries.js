@@ -9,6 +9,7 @@ export const useJuries = () => {
         links: data && data.links,
         meta: data && data.meta,
         isLoading: !error && !data,
+        isLoadingJuries: !error && !data,
         isError: error,
         mutate,
     };

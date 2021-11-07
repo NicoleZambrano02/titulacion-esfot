@@ -17,7 +17,6 @@ import {
 import { useTeachers } from "../data/useTeachers";
 import { useJuriesTeachers } from "../data/useJuriesTeachers";
 import Loading from "./Loading";
-import ShowError from "./ShowError";
 import API from "../data";
 import {
   CheckCircleOutlined,
@@ -26,7 +25,6 @@ import {
 } from "@ant-design/icons";
 import Routes from "../constants/routes";
 
-const { Option } = Select;
 const { Title } = Typography;
 const { confirm } = Modal;
 
@@ -37,12 +35,9 @@ const OralDefenseSchedule = (project) => {
   let teachersNameOptions = [];
 
   const [schedulesData, setSchedulesData] = useState([]);
-  const { teachers, isLoading, isError } = useTeachers();
-  const {
-    juriesTeachers,
-    isLoading: isLoadingJuries,
-    isError: isErrorJuries,
-  } = useJuriesTeachers(project.project);
+  const { isLoading, isError } = useTeachers();
+  const { isLoading: isLoadingJuries, isError: isErrorJuries } =
+    useJuriesTeachers(project.project);
   const [teachersSelected, setTeachersSelected] = useState(false);
   const [daySelected, setDaySelected] = useState(true);
   const [hourSelected, setHourSelected] = useState(false);
@@ -59,32 +54,6 @@ const OralDefenseSchedule = (project) => {
   if (isError || isErrorJuries) {
     return "error";
   }
-
-  console.log("jT", juriesTeachers);
-
-  const getTeachersData = juriesTeachers.map((teacher, index) => {
-    const scheduleData = JSON.parse(teacher.schedule);
-
-    teachersSchedules[teacher.id] = {
-      name: `${teacher.name}`,
-      ...scheduleData,
-    };
-
-    teachersNameOptions.push(
-      <Option key={teacher.id}>{`${teacher.name}`}</Option>
-    );
-
-    return {
-      key: index,
-      id: teacher.id,
-      originalData: teacher,
-      name: teacher.name,
-      career: teacher.career,
-      email: teacher.email,
-      schedule: teacher.schedule,
-    };
-  });
-  console.log("Profesores", getTeachersData);
 
   const handleScheduleChange = (selectedTeachers) => {
     console.log("selectedTeachers", selectedTeachers);
@@ -106,8 +75,6 @@ const OralDefenseSchedule = (project) => {
           });
         });
 
-        console.log("DAYS BY HOUR", daysByHour);
-
         d.push({
           key: hour,
           hour: `${hour}h00 - ${hour + 1}h00`,
@@ -115,7 +82,6 @@ const OralDefenseSchedule = (project) => {
         });
       }
     }
-    console.log("HORARIOS CRUZADOS DE PROFESORES", d);
     setSchedulesData(d);
     setTeachersSelected(true);
     console.log("data", schedulesData);
@@ -190,7 +156,7 @@ const OralDefenseSchedule = (project) => {
     setHourSelected(true);
   };
 
-  const saveTempDate = () => {
+  const saveTempDate = async () => {
     const oralDefenseDate = oralDefenseDay + " " + oralDefenseTime;
     console.log("Datos antes de armar", project.project, oralDefenseDate);
     setSending(true);
@@ -199,8 +165,7 @@ const OralDefenseSchedule = (project) => {
         tribunalSchedule: oralDefenseDate,
         project_id: project.project,
       };
-      console.log("datos que se envian al API", schedule);
-      API.put("/juries/assignSchedule", schedule);
+      await API.put("/juries/assignSchedule", schedule);
       message.success("Fecha tentativa de defensa guardada exitosamente");
       setSending(false);
     } catch (e) {
